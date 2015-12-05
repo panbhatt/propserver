@@ -13,7 +13,7 @@ var swagger = require('swagger-express') ;
 var app = express();
 
 // MONGOOSE Setup. 
-mongoose.connect("mongodb://192.168.191.110/propserver");
+mongoose.connect("mongodb://localhost/propserver");
 
 
 // Load all the Models. 
