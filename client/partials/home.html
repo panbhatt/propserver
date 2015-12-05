@@ -1,0 +1,118 @@
+
+
+<div class="section">
+    
+    <div class="section-colored text-center">
+        <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Modern Business: A Clean &amp; Simple Full Website Template by Start Bootstrap</h2>
+                <p>A complete website design featuring various single page templates from Start Bootstraps library of free HTML starter templates.</p>
+                <hr>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                
+            </div>   
+            
+        </div>    
+                
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4" id="directives-bootstrap-select">
+                <h3><i class="fa fa-check-circle"></i> Projects</h3>
+                <p>
+                      <div class="btn-group col-xs-10" style="padding:0px;" uib-dropdown >
+                          <button id="single-button" type="button" class="btn col-xs-12 btn-success" uib-dropdown-toggle ng-disabled="disabled" >
+                              <b> {{selectedProject}} </b><span class="caret"></span>
+                          </button>
+                          <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
+                            <li role="menuitem" ng-repeat="prj in projects">
+                                <a ng-click="show(prj)">{{prj}}</a>
+                            </li>  
+                          </ul>
+                      </div>
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><center<i class="fa fa-pencil"></i> Releases</h3>
+                <p>
+                        <div class="btn-group col-xs-10" style="padding:0px;" uib-dropdown >
+                          <button id="single-button" type="button" class="btn col-xs-12 btn-warning" uib-dropdown-toggle ng-disabled="disabled" >
+                           <b> {{selectedRelease}} </b><span class="caret"></span>
+                          </button>
+                          <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
+                            <li role="menuitem" ng-repeat="rel in releases">
+                                <b></b><a ng-click="changeRelease(rel)">{{rel}}</a></b>
+                            </li>  
+                          </ul>
+                      </div>
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-folder-open"></i>Property Groups</h3>
+                <p>
+                      <div class="btn-group col-xs-10" style="padding:0px;" uib-dropdown >
+                          <button id="single-button" type="button" class="btn col-xs-12 btn-info" uib-dropdown-toggle ng-disabled="disabled" >
+                           <b> {{selectedPropGroup}} </b><span class="caret"></span>
+                          </button>
+                          <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
+                            <li role="menuitem" ng-repeat="propGroup in propGroups">
+                                <b></b><a ng-click="changePropGroup(propGroup)">{{propGroup}}</a></b>
+                            </li>  
+                          </ul>
+                      </div>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <br/><br/>
+            </div>  
+        </div> 
+
+        <!-- /.row -->
+        <div class="row">
+                <div class="col-xs-3"> <!-- required for floating -->
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tabs-left">
+                      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                      <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                        <li><a href="#settings" data-toggle="tab">Setdddtings</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-9">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="home">Home Tab.sdsdfsdfs</div>
+                      <div class="tab-pane" id="profile">Profile Tab.</div>
+                      <div class="tab-pane" id="messages">Messages Tab.</div>
+                      <div class="tab-pane" id="settings">Settings Tab.</div>
+                    </div>
+                </div>  
+        
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section -->
+
+
+
+

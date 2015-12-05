@@ -1,0 +1,35 @@
+{
+  "name": "propserver",
+  "version": "0.0.0",
+  "homepage": "https://github.com/panbhatt/propserver",
+  "authors": [
+    "panbhatt@gmail.com"
+  ],
+  "description": "Property Manager",
+  "keywords": [
+    "Property",
+    "Manager",
+    "Nodejs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-bootstrap": "~0.14.3",
+    "angular-bootstrap-select": "~0.0.5",
+    "angular-route": "~1.4.8",
+    "angular-route-styles": "*",
+    "angular-xeditable": "~0.1.9",
+    "bootstrap": "~3.3.6",
+    "bootstrap-select": "~1.7.7",
+    "bootstrap-vertical-tabs": "~1.2.1",
+    "font-awesome": "~4.5.0",
+    "jquery": "~2.1.4"
+  }
+}
