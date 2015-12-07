@@ -9,7 +9,8 @@ var app = angular.module('propServerUI', [
     
   'propAddProjectController',
   'propAddReleaseController',
-  'propAddPropGroupController'
+  'propAddPropGroupController',
+  'propAddEnvironmentController'
 ]);
 
 /**
@@ -137,7 +138,20 @@ app.controller('PageCtrl', function ($scope,ModalService) {
 
     };
     
-    
+     $scope.addEnvironment = function() {
+
+            ModalService.showModal({
+              templateUrl: "client/partials/modals/addEnvironment.html",
+              controller: "addEnvironmentController",
+            }).then(function(modal) {
+            
+              modal.element.modal();
+              modal.close.then(function(result) {
+                console.log(result);
+              });
+            });
+
+    };
 
 
 });

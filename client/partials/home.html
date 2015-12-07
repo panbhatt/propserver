@@ -26,7 +26,7 @@
             
         </div>    
                 
-
+        
         <div class="row">
             <div class="col-lg-4 col-md-4" id="directives-bootstrap-select">
                 <h3><i class="fa fa-check-circle"></i> Projects</h3>
@@ -81,8 +81,10 @@
                 </p>
             </div>
 
+        
         </div>
 
+        
         <div class="row">
             <div class="col-lg-4 col-md-4">
                 <br/><br class="divider"/>
@@ -91,12 +93,19 @@
 
         <!-- /.row -->
         <div class="row">
+            
                 <div class="col-xs-2"> <!-- required for floating -->
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs tabs-left">
+                      
+                      
                       <li ng-repeat="env in environments" data-toggle="tab"  ng-class="{'active':$first}" >
                           <a  ng-click="changeEnv(env)"><b>{{env}}</b></a>
                       </li>
+                        
+                      <li><center><button type="button" class="btn btn-primary" ng-click="addEnvironment()">Add Environment (+)</button></center></li>        
+                      
+                      
                       
                     </ul>
                 </div>
@@ -112,8 +121,8 @@
                 </div>  
         
         </div>
-
-    <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+        <br/>
+        
 
     </div>
     <!-- /.container -->

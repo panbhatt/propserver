@@ -1,24 +1,23 @@
 (function() {
 
-    var app = angular.module('propAddReleaseController', [], function() {
+    var app = angular.module('propAddEnvironmentController', [], function() {
     });
 
-    app.controller('addReleaseController', [
+    app.controller('addEnvironmentController', [
         '$scope',
         '$http',
         '$location',
         '$element',
-        'projectName',
         'close',
 
-        function($scope, $http, $location,$element,projectName, close) {
+        function($scope, $http, $location,$element, close) {
 
-            console.log("Project Name = " , projectName);
-            $scope.projectName = projectName; 
+            
         
              $scope.close = function() {
                   close({
-                  release : $scope.projectRelease,
+                  envName : $scope.envName,
+                  envDesc : $scope.envDesc,
                   cancel : false
                 }, 500); // close, but give 500ms for bootstrap to animate
             };
