@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.tabs-left>li.active>a,
+.tabs-left>li.active>a:hover,
+.tabs-left>li.active>a:focus {
+  background-color: #5195ce;
+  border-color: #51A351;
+    
+}

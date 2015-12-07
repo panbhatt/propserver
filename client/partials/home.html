@@ -36,9 +36,12 @@
                               <b> {{selectedProject}} </b><span class="caret"></span>
                           </button>
                           <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
+                            <li role="menuitem"> <a ng-click="addProject()"> Add Project (+) </a></li>
+                            <li class="divider"></li>  
                             <li role="menuitem" ng-repeat="prj in projects">
                                 <a ng-click="show(prj)">{{prj}}</a>
                             </li>  
+                            <li></li>
                           </ul>
                       </div>
                 </p>
@@ -51,6 +54,8 @@
                            <b> {{selectedRelease}} </b><span class="caret"></span>
                           </button>
                           <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
+                            <li role="menuitem"> <a ng-click="addRelease()"> Add Release to {{selectedProject}} (+) </a></li>
+                            <li class="divider"></li>  
                             <li role="menuitem" ng-repeat="rel in releases">
                                 <b></b><a ng-click="changeRelease(rel)">{{rel}}</a></b>
                             </li>  
@@ -66,6 +71,8 @@
                            <b> {{selectedPropGroup}} </b><span class="caret"></span>
                           </button>
                           <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
+                            <li role="menuitem"> <a ng-click="addPropGroup()"> Add Property Group to {{selectedProject}} (+) </a></li>
+                            <li class="divider"></li>    
                             <li role="menuitem" ng-repeat="propGroup in propGroups">
                                 <b></b><a ng-click="changePropGroup(propGroup)">{{propGroup}}</a></b>
                             </li>  
@@ -78,20 +85,19 @@
 
         <div class="row">
             <div class="col-lg-4 col-md-4">
-                <br/><br/>
+                <br/><br class="divider"/>
             </div>  
         </div> 
 
         <!-- /.row -->
         <div class="row">
-                <div class="col-xs-3"> <!-- required for floating -->
+                <div class="col-xs-2"> <!-- required for floating -->
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs tabs-left">
-                      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                      <li><a href="#profile" data-toggle="tab">Profile</a></li>
-                      <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                      <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                        <li><a href="#settings" data-toggle="tab">Setdddtings</a></li>
+                      <li ng-repeat="env in environments" data-toggle="tab"  ng-class="{'active':$first}" >
+                          <a  ng-click="changeEnv(env)"><b>{{env}}</b></a>
+                      </li>
+                      
                     </ul>
                 </div>
 
@@ -106,6 +112,8 @@
                 </div>  
         
         </div>
+
+    <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
 
     </div>
     <!-- /.container -->

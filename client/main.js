@@ -3,7 +3,13 @@
  */
 var app = angular.module('propServerUI', [
   'ngRoute',
-  'ui.bootstrap'    
+  'ui.bootstrap' ,
+  'xeditable',
+  'angularModalService',
+    
+  'propAddProjectController',
+  'propAddReleaseController',
+  'propAddPropGroupController'
 ]);
 
 /**
@@ -31,10 +37,15 @@ app.controller('BlogCtrl', function (/* $scope, $location, $http */) {
   console.log("Blog Controller reporting for duty.");
 });
 
+// Make sure the things for the XEditable option. 
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
+
 /**
  * Controls all other Pages
  */
-app.controller('PageCtrl', function ($scope) {
+app.controller('PageCtrl', function ($scope,ModalService) {
     
     $scope.selectedProject = "Select Project";
     $scope.selectedRelease = "Select Release";
@@ -47,7 +58,7 @@ app.controller('PageCtrl', function ($scope) {
     $scope.environments = [ "DEV", "QA", "ENV" ] ; 
     
     
-  console.log("Page Controller reporting for duty.");
+    console.log("Page Controller reporting for duty.");
     $scope.show = function(prj) {
        $scope.selectedProject = prj;
     };
@@ -58,6 +69,12 @@ app.controller('PageCtrl', function ($scope) {
         console.log("Current Release = " , $scope.selectedRelease);
     };
     
+    $scope.changeEnv = function(env) {
+       $scope.selectedEnvironment = env;
+        console.log("Current Env = " , $scope.selectedEnvironment);
+    };    
+ 
+    
     $scope.changePropGroup = function(propGroup) {
        $scope.selectedPropGroup = propGroup;
     };
@@ -65,7 +82,62 @@ app.controller('PageCtrl', function ($scope) {
     
     $scope.$watch('selectedProject',function(val) {
         console.log("Value = ", val);
-    }); 
+    });
+    
+    $scope.addProject = function() {
+
+            
+            ModalService.showModal({
+              templateUrl: "client/partials/modals/addProject.html",
+              controller: "addProjectController"
+            }).then(function(modal) {
+              
+              modal.element.modal();
+              modal.close.then(function(result) {
+                console.log(result);
+              });
+            });
+
+    };
+    
+    $scope.addRelease = function() {
+
+            // Just provide a template url, a controller and call 'showModal'.
+            ModalService.showModal({
+              templateUrl: "client/partials/modals/addRelease.html",
+              controller: "addReleaseController",
+              inputs : {
+                "projectName" : $scope.selectedProject    
+              }
+            }).then(function(modal) {
+            
+              modal.element.modal();
+              modal.close.then(function(result) {
+                console.log(result);
+              });
+            });
+
+    };
+    
+     $scope.addPropGroup = function() {
+
+            ModalService.showModal({
+              templateUrl: "client/partials/modals/addPropGroup.html",
+              controller: "addPropGroupController",
+              inputs : {
+                "projectName" : $scope.selectedProject    
+              }
+            }).then(function(modal) {
+            
+              modal.element.modal();
+              modal.close.then(function(result) {
+                console.log(result);
+              });
+            });
+
+    };
+    
+    
 
 
 });
