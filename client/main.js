@@ -10,7 +10,13 @@ var app = angular.module('propServerUI', [
   'propAddProjectController',
   'propAddReleaseController',
   'propAddPropGroupController',
-  'propAddEnvironmentController'
+  'propAddEnvironmentController',
+  'propGlobalService',
+  'propProjectService',
+  'propEnvironmentService',
+  'propReleaseService',
+  'propPropGroupService',
+  'propKeysService'
 ]);
 
 /**
@@ -48,7 +54,7 @@ app.run(function(editableOptions, editableThemes) {
 /**
  * Controls all other Pages
  */
-app.controller('PageCtrl', function ($scope,ModalService) {
+app.controller('PageCtrl', function ($scope,ModalService, projectService) {
     
     $scope.selectedProject = "Select Project";
     $scope.selectedRelease = "Select Release";
@@ -59,6 +65,22 @@ app.controller('PageCtrl', function ($scope,ModalService) {
     $scope.releases = [ "0.0", "0.5", "1.0.0", "1.0.1"] ; 
     $scope.propGroups = [ "database", "network", "thirdPartyIntegration", "redis"] ; 
     $scope.environments = [ "DEV", "QA", "ENV" ] ; 
+    
+    
+    projectService.listProjects().then(function(prjList) {
+                    console.log("login info @ angular", prjList) ;
+                    if(prjList && prjList.length > 0 ) {
+                        var listOfProjects = [] ; 
+                        prjList.forEach(function(prjData) {
+                            listOfProjects.push(prjData.projectName) ;   
+                        });
+                        $scope.projects = listOfProjects;
+                    }
+                
+                }, function(err) {
+                    console.error("An Error has occured", prjList);
+                });
+    
     
     
     console.log("Page Controller reporting for duty.");
