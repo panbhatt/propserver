@@ -12,9 +12,10 @@
         'environmentService',
         'releaseService',
         'propGroupService',
+        'keysService',
 
         function($scope, $http, $location, 
-                 ModalService, projectService, environmentService, releaseService,propGroupService    ) {
+                 ModalService, projectService, environmentService, releaseService,propGroupService     ,keysService) {
 
             
                 $scope.selectedProject = "Select Project";
@@ -27,6 +28,9 @@
                 $scope.releases = [ ] ; 
                 $scope.propGroups = [ ] ; 
                 $scope.environments = [ "DEV", "QA", "ENV" ] ; 
+            
+                $scope.keys = [] ; 
+                $scope.keysId = "";
 
 
                 projectService.listProjects().then(function(prjList) {
@@ -96,10 +100,36 @@
                 $scope.changeEnv = function(env) {
                    $scope.selectedEnvironment = env;
                     console.log("Current Env = " , $scope.selectedEnvironment);
+                    if($scope.selectedProject && $scope.selectedEnvironment && $scope.selectedPropGroup && $scope.selectedRelease) {
+
+                     // Get the Property Value from the server.    
+                        keysService.listKeysByAllParams($scope.selectedProject, 
+                    $scope.selectedEnvironment , $scope.selectedRelease , $scope.selectedPropGroup). then(function(keyList) {
+                                $scope.keys = [] ; 
+                                var finalSetOfKeys = [] ; 
+                                $scope.keysId = keyList.id ; 
+                            
+                               if(keyList && keyList.keys) {
+                                    for(var keyName in keyList.keys) {
+                                        var keyValue = keyList.keys[keyName];
+                                        finalSetOfKeys.push({ "name" : keyName, "value" : keyValue,
+                                                            "id" : keyList.id});
+                                    }
+                               }
+                            
+                                $scope.keys = finalSetOfKeys ; 
+                        }, function(err) {
+                                $scope.keys = [] ; 
+                                console.error(" Error occured, while fetching the list of Keys = " , err) ; 
+                            
+                        });
+                        
+                    }
                 };    
 
 
                 $scope.changePropGroup = function(propGroup) {
+                console.log("Selected PropGroup = ", propGroup);
                    $scope.selectedPropGroup = propGroup;
                 };
 
@@ -176,63 +206,41 @@
 
                 };
 
-                  $scope.users = [
-                    {id: 1, name: 'awesome user1', status: 2},
-                    {id: 2, name: 'awesome user2', status: undefined},
-                    {id: 3, name: 'awesome user3', status: 2}
-                  ]; 
 
-                  $scope.statuses = [
-                    {value: 1, text: 'status1'},
-                    {value: 2, text: 'status2'},
-                    {value: 3, text: 'status3'},
-                    {value: 4, text: 'status4'}
-                  ]; 
+              $scope.saveKey = function(data, index) {
+                
+                  data.id = $scope.keysId; 
+                  $scope.keys[index]= { "name" : data.keyName, "value" : data.keyValue,
+                                                            "id" : $scope.keysId}; 
+                  keysService.addKeyByKeyId($scope.keysId, data.keyName, data.keyValue).then(
+                      function(data) {
+                          console.log("Key Successfully added"); 
+                      },function(err) {
+                          console.error("There is a problem adding the new Key, please try again.  " ) ;    
+                      });
+                  
 
-                $scope.groups = [];
-
-                 $scope.showGroup = function(user) {
-                if(user.group && $scope.groups.length) {
-                  var selected = $filter('filter')($scope.groups, {id: user.group});
-                  return selected.length ? selected[0].text : 'Not set';
-                } else {
-                  return user.groupName || 'Not set';
-                }
-              };
-
-              $scope.showStatus = function(user) {
-                var selected = [];
-                if(user.status) {
-                  selected = $filter('filter')($scope.statuses, {value: user.status});
-                }
-                return selected.length ? selected[0].text : 'Not set';
-              };
-
-              $scope.checkName = function(data, id) {
-                if (id === 2 && data !== 'awesome') {
-                  return "Username 2 should be `awesome`";
-                }
-              };
-
-              $scope.saveUser = function(data, id) {
-                //$scope.user not updated yet
-                angular.extend(data, {id: id});
-                return $http.post('/saveUser', data);
               };
 
               // remove user
-              $scope.removeUser = function(index) {
-                $scope.users.splice(index, 1);
+              $scope.removeKey = function(keyNameToDelete,index) {
+                  console.log("Data that is to be deleted " , keyNameToDelete) ; 
+                  keysService.deleteKeyById($scope.keysId, keyNameToDelete).then(function(data){
+                        console.log("Key " +  keyNameToDelete + " is been successfully deleted. "); 
+                       $scope.keys.splice(index, 1);
+                  }, function(errr) {
+                    console.error("An Error occured, while Remvoing a key from the Server " ) ;  
+                  });
+                  
               };
 
                 $scope.addUser = function() {
                     $scope.inserted = {
-                      id: $scope.users.length+1,
-                      name: '',
-                      status: 2,
-                      group: null 
+                      id: $scope.keys.length+1,
+                      name: 'NEW_KEY',
+                      value: 'NEW_VALUE'
                     };
-                    $scope.users.push($scope.inserted);
+                    $scope.keys.push($scope.inserted);
                   };
     
 

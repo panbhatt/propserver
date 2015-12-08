@@ -7,12 +7,12 @@
         var url = "/keys";
 
         this.listKeysByAllParams = function(prjName,envName,releaseName, propGroup) { 
-            var fullUrl =  "/projects/" +  prjName+"/env"+envName+"/release"+"/propgroup"+propGroup;
+            var fullUrl =  "/projects/" +  prjName+"/env/"+envName+"/release/"+releaseName+"/propgroup/"+propGroup;
             var deferred = $q.defer();
             $http.get(fullUrl).success(function(data) {
                 deferred.resolve(data);
-            }).error(function() {
-                $log("error");
+            }).error(function(err) {
+                console.error("An Error occured, while fetching list of Keys for URL = " + fullUrl,err);
                 deferred.reject('error during Keys of an project'+fullUrl);
             });
             return deferred.promise;
@@ -35,12 +35,26 @@
          this.addKeyByKeyId = function(keyId, keyName, keyValue) {
             var fullUrl =  url + "/"+ keyId; 
             var deferred = $q.defer();
-            var keyDetails = {} ; 
-             keyDetails[keyName] = keyValue; 
-            $http.post(fullUrl,releaseDetails).success(function(data) {
+            var keyDetails = { "key" : keyName, "value" : keyValue} ; 
+             
+            $http.post(fullUrl,keyDetails).success(function(data) {
                 deferred.resolve(data);
             }).error(function(err) {
                 console.error("Error occured during addition of new Keys by Key ID. ", err);
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        };
+        
+        this.deleteKeyById = function(keyId, keyName) {
+            var fullUrl =  url + "/"+ keyId + "/name/" + keyName; 
+            var deferred = $q.defer();
+             
+            $http.delete(fullUrl).success(function(data) {
+                console.log("Successfully deleted the Key " , keyName); 
+                deferred.resolve(data);
+            }).error(function(err) {
+                console.error("Error occured during deletion of new Keys by Key ID. ", err);
                 deferred.reject(err);
             });
             return deferred.promise;

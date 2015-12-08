@@ -110,7 +110,7 @@
                     <ul class="nav nav-tabs tabs-left">
                       
                       
-                      <li ng-repeat="env in environments" data-toggle="tab"  ng-class="{'active':$first}" >
+                      <li ng-repeat="env in environments" data-toggle="tab"   >
                           <a  ng-click="changeEnv(env)"><b>{{env}}</b></a>
                       </li>
                         
@@ -132,23 +132,23 @@
                                   <td style="width:40%"><center>Value</center></td>
                                   <td style="width:20%"><center>Edit</center></td>
                                 </tr>
-                                <tr ng-repeat="user in users">
+                                <tr ng-repeat="key in keys">
                                   <td>
                                     <!-- editable username (text with validation) -->
-                                    <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required class="uneditable-input" edit-disabled="false">
-                                      {{ user.name || 'empty' }}
+                                    <span editable-text="key.name" e-name="keyName" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required edit-disabled="false">
+                                      {{ key.name || '' }}
                                     </span>
                                   </td>
-                                  <td>
+                                  <td><center>
                                     <!-- editable status (select-local) -->
-                                     <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
-                                      {{ user.status || 'empty' }}
+                                     <span editable-text="user.name" e-name="keyValue" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required edit-disabled="false">
+                                      {{ key.value || '' }}
                                     </span>
-                                    
+                                    </center>
                                   </td>
                                   <td style="white-space: nowrap">
                                     <!-- form -->
-                                    <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline"              shown="inserted == user">
+                                    <form editable-form name="rowform" onbeforesave="saveKey($data, $index)" ng-show="rowform.$visible" class="form-buttons form-inline">
                                       <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                                         save
                                       </button>
@@ -158,8 +158,8 @@
                                     </form>
                                     <div class="buttons" ng-show="!rowform.$visible">
                                       <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-                                      <button class="btn btn-warning" ng-click="removeUser($index)">cancel</button>
-                                        <button class="btn btn-danger" ng-click="removeUser($index)">delete</button>
+                                     
+                                        <button class="btn btn-danger" ng-click="removeKey(key.name, $index)">delete</button>
                                     </div>  
                                   </td>
                                 </tr>
