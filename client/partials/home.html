@@ -54,7 +54,12 @@
                            <b> {{selectedRelease}} </b><span class="caret"></span>
                           </button>
                           <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
-                            <li role="menuitem"> <a ng-click="addRelease()"> Add Release to {{selectedProject}} (+) </a></li>
+                            <div ng-show="project !=  ''">
+                            <li role="menuitem"><center> <a ng-click="addRelease()"> Add Release to {{project}} (+) </a></center></li>
+                            </div>
+                            <div ng-show="project ===  ''">
+                            <li role="menuitem"><center>Select a project first</center></li>
+                            </div>  
                             <li class="divider"></li>  
                             <li role="menuitem" ng-repeat="rel in releases">
                                 <b></b><a ng-click="changeRelease(rel)">{{rel}}</a></b>
@@ -71,7 +76,13 @@
                            <b> {{selectedPropGroup}} </b><span class="caret"></span>
                           </button>
                           <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
-                            <li role="menuitem"> <a ng-click="addPropGroup()" class="col-xs-10"> Add Property Group to {{selectedProject}} (+) </a></li>
+                            <div ng-show="project !=  ''">
+                            <li role="menuitem"> <center><a ng-click="addPropGroup()"> &nbsp;&nbsp;Add Group to {{project}} (+) </a> </center></li>
+                            </div>
+                            <div ng-show="project ===  ''">
+                            <li role="menuitem"><center>Select a project first</center></li>
+                            </div>
+                          
                             <li class="divider"></li>    
                             <li role="menuitem" ng-repeat="propGroup in propGroups">
                                 <b></b><a ng-click="changePropGroup(propGroup)">{{propGroup}}</a></b>

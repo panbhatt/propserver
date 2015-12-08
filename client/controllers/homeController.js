@@ -18,6 +18,7 @@
 
             
                 $scope.selectedProject = "Select Project";
+                $scope.project = "";
                 $scope.selectedRelease = "Select Release";
                 $scope.selectedPropGroup = "Select Property Group";
                 $scope.selectedEnvironment = "";
@@ -59,6 +60,8 @@
 
                 $scope.changeProject = function(prj) {
                      $scope.selectedProject = prj;
+                     $scope.project = prj; 
+                    
                      releaseService.listReleases(prj).then(function(releaseList) {
 
                                         var releasesForProject = [] ; 
