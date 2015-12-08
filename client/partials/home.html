@@ -39,7 +39,7 @@
                             <li role="menuitem"> <a ng-click="addProject()"> Add Project (+) </a></li>
                             <li class="divider"></li>  
                             <li role="menuitem" ng-repeat="prj in projects">
-                                <a ng-click="show(prj)">{{prj}}</a>
+                                <a ng-click="changeProject(prj)">{{prj}}</a>
                             </li>  
                             <li></li>
                           </ul>
@@ -71,7 +71,7 @@
                            <b> {{selectedPropGroup}} </b><span class="caret"></span>
                           </button>
                           <ul class="uib-dropdown-menu col-xs-12" role="menu" aria-labelledby="single-button" >
-                            <li role="menuitem"> <a ng-click="addPropGroup()"> Add Property Group to {{selectedProject}} (+) </a></li>
+                            <li role="menuitem"> <a ng-click="addPropGroup()" class="col-xs-10"> Add Property Group to {{selectedProject}} (+) </a></li>
                             <li class="divider"></li>    
                             <li role="menuitem" ng-repeat="propGroup in propGroups">
                                 <b></b><a ng-click="changePropGroup(propGroup)">{{propGroup}}</a></b>
@@ -103,7 +103,7 @@
                           <a  ng-click="changeEnv(env)"><b>{{env}}</b></a>
                       </li>
                         
-                      <li><center><button type="button" class="btn btn-primary" ng-click="addEnvironment()">Add Environment (+)</button></center></li>        
+                      <li><center><button type="button" class="btn btn-primary" ng-click="addEnvironment()">Add Env (+)</button></center></li>        
                       
                       
                       
