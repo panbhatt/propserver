@@ -37,8 +37,9 @@
                 $scope.lang = 'en-US';
 		        $scope.language = 'English'; 
             
-               
-                
+                var dialogWindowOptions = { windowClass : 'center-modal', size : 'sm'} ;
+            
+    
 
 
                 projectService.listProjects().then(function(prjList) {
@@ -155,8 +156,21 @@
                         }).then(function(modal) {
 
                           modal.element.modal();
-                          modal.close.then(function(result) {
-                            console.log(result);
+                          modal.close.then(function(prjData) {
+                              console.log(prjData);
+                              if(prjData.cancel === false) {
+                                    // Call the project service. 
+                                  projectService.addProject(prjData.projectName, prjData.projectDesc).then(function(prjAddResult){
+                                    console.log("Project has been successfully added");   
+                                      $scope.projects.push(prjData.projectName); 
+                                     dialogs.notify("Property Manager", "<b>"+prjData.projectName + "</b> Project has been successfully saved", dialogWindowOptions ); 
+                                  }, function(err) {
+                                    console.error("An error occured, while adding the project");   
+                                    dialogs.error("Property Manager", "An Error occured while adding project : " + ( err.error || "" ), dialogWindowOptions  );   
+                                  }
+                                  );
+                              }
+                            
                           });
                         });
 
@@ -174,8 +188,21 @@
                         }).then(function(modal) {
 
                           modal.element.modal();
-                          modal.close.then(function(result) {
-                            console.log(result);
+                          modal.close.then(function(relData) {
+                            console.log(relData);
+                                if(relData.cancel === false) {
+                                    // Call the project service. 
+                                  releaseService.addRelease($scope.selectedProject, relData.release, relData.desc).then(function(relAddResult){
+                                    console.log("Release has been successfully added");   
+                                      $scope.releases.push(relData.release); 
+                                     dialogs.notify("Property Manager", "<b>"+relData.release + "</b> Release has been successfully added to <b>" + $scope.selectedProject + "</b>" , dialogWindowOptions ); 
+                                  }, function(err) {
+                                    console.error("An error occured, while adding the project");   
+                                    dialogs.error("Property Manager", "An Error occured while adding the release <br/>: " + ( err.error || "" ), dialogWindowOptions  );   
+                                  }
+                                  );
+                              } 
+ 
                           });
                         });
 
@@ -192,16 +219,18 @@
                         }).then(function(modal) {
 
                           modal.element.modal();
-                          modal.close.then(function(modalResult) {
-                                    if(modalResult.cancel === false ) {
+                          modal.close.then(function(propGrupData) {
+                                        console.log(propGrupData);
+                                    if(propGrupData.cancel === false ) {
                                         // Call the Prop Group Service to add the data.    
                                         propGroupService.addPropGroup($scope.selectedProject, 
-                                            modalResult.propGroupName, modalResult.propGroupDesc).
-                                        then(function(data) {
-                                            console.log("PROP Group Added = ",modalResult.propGroupName); 
-                                            $scope.propGroups.push(modalResult.propGroupName);
+                                            propGrupData.propGroupName, propGrupData.propGroupDesc).
+                                        then(function(result) {
+                                            console.log("PROP Group Added = ",propGrupData.propGroupName); 
+                                            $scope.propGroups.push(propGrupData.propGroupName);
+                                            dialogs.notify("Property Manager", "<b>"+propGrupData.propGroupName + "</b> Group has been successfully added to <b>" + $scope.selectedProject + "</b>" , dialogWindowOptions ); 
                                         }, function(err) {
-                                            console.log("PROP Group Deleted ");
+                                             dialogs.error("Property Manager", "An Error occured while adding the property group :<br/> " + ( err.error || "" ), dialogWindowOptions  );   
                                         });
                                         
                                     }
@@ -235,7 +264,7 @@
                   keysService.addKeyByKeyId($scope.keysId, data.keyName, data.keyValue).then(
                       function(result) {
                           console.log("Key Successfully added"); 
-                           dialogs.notify("Key Added", "<b>"+data.keyName + "</b> Key has been successfully saved", { windowClass : 'center-modal', size : 'sm'} ); 
+                           dialogs.notify("Property Manager", "<b>"+data.keyName + "</b> Key has been successfully saved", dialogWindowOptions ); 
                       },function(err) {
                           console.error("There is a problem adding the new Key, please try again.  " ) ;    
                       });

@@ -19,6 +19,7 @@
              $scope.close = function() {
                   close({
                   release : $scope.projectRelease,
+                  desc : $scope.projectReleaseDesc,      
                   cancel : false
                 }, 500); // close, but give 500ms for bootstrap to animate
             };
