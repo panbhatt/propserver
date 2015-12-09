@@ -61,6 +61,19 @@ a {
     margin-left: -10%;
 }
 
+.shell {
+ border-radius: 10px 10px 10px 10px;
+ border-color: #ff9900;
+ border-style:solid;
+ overflow:hidden;
+}
+
+.shellKey {
+ border-radius: 2px 2px 2px 2px;
+ border-color: #000000;
+ border-style:dotted ;
+ overflow:hidden;
+}
 
 
 

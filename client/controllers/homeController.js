@@ -120,11 +120,13 @@
                                 $scope.keysId = keyList.id ; 
                             
                                if(keyList && keyList.keys) {
-                                    for(var keyName in keyList.keys) {
+                                   var sortedKeys   = Object.keys(keyList.keys).sort(); 
+                                   console.log(JSON.stringify(sortedKeys));
+                                     sortedKeys.forEach(function(keyName){
                                         var keyValue = keyList.keys[keyName];
                                         finalSetOfKeys.push({ "name" : keyName, "value" : keyValue,
                                                             "id" : keyList.id});
-                                    }
+                                     });
                                }
                             
                                 $scope.keys = finalSetOfKeys ; 
