@@ -22,13 +22,15 @@ var app = angular.module('propServerUI', [
   'propEnvironmentService',
   'propReleaseService',
   'propPropGroupService',
-  'propKeysService'
+  'propKeysService',
+    
+  'propTranslate'
 ]);
 
 /**
  * Configure the Routes
  */
-app.config(['$routeProvider', function ($routeProvider) {
+app.config(['$routeProvider','$translateProvider', function ($routeProvider,$translateProvider) {
   $routeProvider
     // Home
     .when("/", {templateUrl: "client/partials/home.html", controller: "homeController"})
@@ -41,6 +43,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     
     // else 404
     .otherwise("/404", {templateUrl: "client/partials/404.html", controller: "PageCtrl"});
+    
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
+    $translateProvider.preferredLanguage('en');
+
 }]);
 
 /**

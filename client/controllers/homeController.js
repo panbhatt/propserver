@@ -20,7 +20,7 @@
                  ModalService, dialogs, projectService, environmentService, releaseService,propGroupService     ,keysService) {
 
             
-              /*  $scope.selectedProject = "Select Project";
+                $scope.selectedProject = "Select Project";
                 $scope.project = "";
                 $scope.selectedRelease = "Select Release";
                 $scope.selectedPropGroup = "Select Property Group";
@@ -35,11 +35,10 @@
                 $scope.keysId = "";
             
                 $scope.lang = 'en-US';
-		        $scope.language = 'English'; */
+		        $scope.language = 'English'; 
             
-               /* dialogs.error('Error','An unknown error occurred preventing the completion of the requested action.'); */
-                dialogs.wait('Creating User','Please wait while we attempt to create user "Michael Conroy."<br><br>This should only take a moment.',50);
-                /*
+               
+                
 
 
                 projectService.listProjects().then(function(prjList) {
@@ -234,8 +233,9 @@
                   $scope.keys[index]= { "name" : data.keyName, "value" : data.keyValue,
                                                             "id" : $scope.keysId}; 
                   keysService.addKeyByKeyId($scope.keysId, data.keyName, data.keyValue).then(
-                      function(data) {
+                      function(result) {
                           console.log("Key Successfully added"); 
+                           dialogs.notify("Key Added", "<b>"+data.keyName + "</b> Key has been successfully saved", { windowClass : 'center-modal', size : 'sm'} ); 
                       },function(err) {
                           console.error("There is a problem adding the new Key, please try again.  " ) ;    
                       });
@@ -264,7 +264,7 @@
                     $scope.keys.push($scope.inserted);
                   };
     
-  */
+  
         }
     ]);
 })();
