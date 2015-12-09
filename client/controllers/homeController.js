@@ -248,8 +248,22 @@
                         }).then(function(modal) {
 
                           modal.element.modal();
-                          modal.close.then(function(result) {
-                            console.log(result);
+                          modal.close.then(function(envData) {
+                                console.log(envData);
+                                 if(envData.cancel === false ) {
+                                        // Call the Prop Group Service to add the data.    
+                                        environmentService.addEnvironment( 
+                                            envData.envName, envData.envDesc).
+                                        then(function(result) {
+                                            console.log("Environment Added = ",envData.envName); 
+                                            $scope.environments.push(envData.envName);
+                                            dialogs.notify("Property Manager", "<b>"+envData.envName + "</b> Environment has been successfully added" , dialogWindowOptions ); 
+                                        }, function(err) {
+                                             dialogs.error("Property Manager", "An Error occured while adding the environment:<br/> " + ( err.error || "" ), dialogWindowOptions  );   
+                                        });
+                                        
+                                    }
+
                           });
                         });
 
