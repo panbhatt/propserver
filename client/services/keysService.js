@@ -19,14 +19,14 @@
         };
         
          this.addKey = function(prjName, envName,releaseName, propGroup, keyName, keyValue) {
-            var fullUrl =  "/projects/" +  prjName+"/env"+envName+"/release"+"/propgroup"+propGroup;
+            var fullUrl =  "/projects/" +  prjName+"/env/"+envName+"/release/"+releaseName+"/propgroup/"+propGroup;
             var deferred = $q.defer();
             var keyDetails = {} ; 
              keyDetails[keyName] = keyValue; 
-            $http.post(fullUrl,releaseDetails).success(function(data) {
+            $http.post(fullUrl,keyDetails).success(function(data) {
                 deferred.resolve(data);
             }).error(function(err) {
-                console.error("Error occured during addition of new KEys", err);
+                console.error("Error occured during addition of new Keys", err);
                 deferred.reject(err);
             });
             return deferred.promise;
@@ -55,6 +55,20 @@
                 deferred.resolve(data);
             }).error(function(err) {
                 console.error("Error occured during deletion of new Keys by Key ID. ", err);
+                deferred.reject(err);
+            });
+            return deferred.promise;
+        };
+        
+        this.copyAllKeys = function(srcDestInfo) {
+            var fullUrl =  url + "/copy/all"; 
+            var deferred = $q.defer();
+             
+            $http.post(fullUrl,srcDestInfo).success(function(data) {
+                console.log("Successfully Copied the keys " , data ); 
+                deferred.resolve(data);
+            }).error(function(err) {
+                console.error("Error occured, while copying the keys.  ", err);
                 deferred.reject(err);
             });
             return deferred.promise;

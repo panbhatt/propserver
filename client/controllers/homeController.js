@@ -29,7 +29,7 @@
                 $scope.projects = [ "ABCD", "DEF", "JKDKD" ] ; 
                 $scope.releases = [ ] ; 
                 $scope.propGroups = [ ] ; 
-                $scope.environments = [ "DEV", "QA", "ENV" ] ; 
+                $scope.environments = [ ] ; 
             
                 $scope.keys = [] ; 
                 $scope.keysId = "";
@@ -109,7 +109,8 @@
                 $scope.changeEnv = function(env) {
                    $scope.selectedEnvironment = env;
                     console.log("Current Env = " , $scope.selectedEnvironment);
-                    if($scope.selectedProject && $scope.selectedEnvironment && $scope.selectedPropGroup && $scope.selectedRelease) {
+                    console.log($scope.selectedProject , $scope.selectedPropGroup , $scope.selectedRelease , $scope.selectedEnvironment);
+                    if($scope.selectedProject && $scope.selectedEnvironment && $scope.selectedPropGroup && $scope.selectedRelease && $scope.selectedRelease != "Select Release" && $scope.selectedPropGroup != "Select Property Group") {
 
                      // Get the Property Value from the server.    
                         keysService.listKeysByAllParams($scope.selectedProject, 
@@ -129,6 +130,7 @@
                                 $scope.keys = finalSetOfKeys ; 
                         }, function(err) {
                                 $scope.keys = [] ; 
+                                $scope.keysId = undefined; 
                                 console.error(" Error occured, while fetching the list of Keys = " , err) ; 
                             
                         });
@@ -275,13 +277,29 @@
                   data.id = $scope.keysId; 
                   $scope.keys[index]= { "name" : data.keyName, "value" : data.keyValue,
                                                             "id" : $scope.keysId}; 
-                  keysService.addKeyByKeyId($scope.keysId, data.keyName, data.keyValue).then(
-                      function(result) {
-                          console.log("Key Successfully added"); 
-                           dialogs.notify("Property Manager", "<b>"+data.keyName + "</b> Key has been successfully saved", dialogWindowOptions ); 
-                      },function(err) {
-                          console.error("There is a problem adding the new Key, please try again.  " ) ;    
-                      });
+                  if($scope.keysId) {
+                      keysService.addKeyByKeyId($scope.keysId, data.keyName, data.keyValue).then(
+                          function(result) {
+                              console.log("Key Successfully added"); 
+                               dialogs.notify("Property Manager", "<b>"+data.keyName + "</b> Key has been successfully saved", dialogWindowOptions ); 
+                          },function(err) {
+                              console.error("There is a problem adding the new Key, please try again.  " ) ;    
+                              dialogs.error("Property Manager", "An Error occured while adding the Key:<br/> " + ( err.error || "" ), dialogWindowOptions  ); 
+                          });
+                  } else {
+                      
+                      keysService.addKey($scope.selectedProject, $scope.selectedEnvironment, $scope.selectedRelease, $scope.selectedPropGroup, data.keyName, data.keyValue).then(             
+                          function(keyData)  {
+                            console.log("Key has been newly added .. with ID = ", keyData.id); 
+                              $scope.keysId = keyData.id; 
+                               dialogs.notify("Property Manager", "<b>"+data.keyName + "</b> Key has been successfully saved", dialogWindowOptions ); 
+                          }, function(errData) {
+                           console.error("An Error has been occurred, while adding the Keys ",errData );    
+                               dialogs.error("Property Manager", "An Error occured while adding the Key:<br/> " + ( err.error || "" ), dialogWindowOptions  ); 
+                          }
+                      
+                      );
+                  }
                   
 
               };
@@ -298,7 +316,7 @@
                   
               };
 
-                $scope.addUser = function() {
+                $scope.addRow = function() {
                     $scope.inserted = {
                       id: $scope.keys.length+1,
                       name: 'NEW_KEY',
@@ -306,6 +324,58 @@
                     };
                     $scope.keys.push($scope.inserted);
                   };
+            
+               $scope.copyProperties = function() {
+                   
+                     ModalService.showModal({
+                          templateUrl: "client/partials/modals/copyProperties.html",
+                          controller: "copyPropertiesController",
+                          inputs : {
+                            "project" : $scope.selectedProject    ,
+                            "releases" : $scope.releases,
+                            "propGroups" : $scope.propGroups,
+                            "environments" : $scope.environments  
+                          }
+                         
+                        }).then(function(modal) {
+
+                          modal.element.modal();
+                          modal.close.then(function(srcPropData) {
+                                        console.log(srcPropData);
+                                    if(srcPropData.cancel === false ) {
+                                         var srcDestInfo = {
+                                            "dest" : {
+                                                 project : $scope.selectedProject,
+                                                 propGroup : $scope.selectedPropGroup,
+                                                 release : $scope.selectedRelease,
+                                                 environment : $scope.selectedEnvironment                      
+                                            },
+                                           "src" : {
+                                               project : $scope.selectedProject,
+                                               propGroup : srcPropData.propGroup,
+                                               release : srcPropData.release,
+                                               environment : srcPropData.environment
+                                           }
+                                             
+                                         };
+                                        
+                                        keysService.copyAllKeys(srcDestInfo).then(function(data) { 
+                                                console.log("Property has been copied "); 
+                                            dialogs.notify("Property Manager", "Properties has been copied.",dialogWindowOptions);
+                                            // Refresh the page 
+                                            $scope.changeEnv($scope.selectedEnvironment);
+                                        }, function(err){
+                                            
+                                           dialogs.error("Property Manager", "An Error Occured : " + ( err.error || "" ),dialogWindowOptions);       
+                                        });
+                                      
+                                        
+                                    }
+                              
+                          });
+                        });
+                   
+               }
     
   
         }

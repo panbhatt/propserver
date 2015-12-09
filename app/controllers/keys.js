@@ -464,6 +464,72 @@ module.exports.copyKeys =
     
     
     }
+
+    // Copy Keys from one PROJ/ENV/PROPGroup/Release to another. 
+/**
+ * @swagger
+ * path: /keys/copy/all
+ * operations:
+ *   -  httpMethod: POST
+ *      summary: Copy a specific set of keys to another PROJECT/ENV/RELEASE/PROPGROUP
+ *      notes: Copy a specific set of keys to another PROJECT/ENV/RELEASE/PROPGROUP
+ *      nickname: COPY_KEYS
+ *      produces: 
+ *        - application/json
+ *      consumes: 
+ *        - application/json
+ *      parameters:
+ *        - name: targetProjInformation
+ *          description: JSON Object including "src","dest" two attributes that describes from where we need to copy the properties to where. 
+ *          paramType: body
+ *          required: true
+ *          dataType: string
+ *      responseMessages:
+ *        - code: 201
+ *          message : Successfully Copied
+ *        - code: 500
+ *          message : Error with the description.
+ */
+module.exports.copyKeysFromOneToAnother =
+    
+    function(req,res) { 
+
+        var body = req.body; 
+        if(body.src && body.dest) {
+            var keysSearchCrieteria = {
+                 projectName : body.src.project,
+                 env : body.src.environment,
+                 release : body.src.release,
+                 groupName : body.src.propGroup 
+              } ;
+            KeysModel.single(keysSearchCrieteria,function(err, result) {
+                if(!err && result)  {
+
+                   var destKeysObj = {
+                        projectName : body.dest.project,
+                        env : body.dest.environment,
+                        release : body.dest.release,
+                        groupName : body.dest.propGroup 
+                   };
+                   destKeysObj.keys = result.keys; 
+
+                    
+                   KeysModel.insert(destKeysObj,function(err,resultKeys){
+                          if(!err)      {
+                              res.status(201).json({ "success" : "created", "id" : resultKeys._id});
+                        }     
+                    });
+                } else {
+                    res.status(500).json({"error" : "No properties available for the given combination of Project/Env/Release/Property Group"}) ;
+                }
+            });
+        } else {
+            
+         res.status(500).json({"error" : "Request body does not contain SRC n DEST attribute"}) ;  
+        }
+    
+    
+    }
     
 
 

@@ -16,6 +16,7 @@ var app = angular.module('propServerUI', [
   'propAddPropGroupController',
   'propAddEnvironmentController',
   'propHomeController',
+  'propCopyPropertiesController',
     
   'propGlobalService',
   'propProjectService',

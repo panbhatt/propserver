@@ -9,5 +9,6 @@ router.post('/:keysId', keysController.addUpdateKeysToId);
 router.put('/:keysId', keysController.addUpdateKeysToId);
 router.delete('/:keysId/name/:keyName', keysController.deleteKeysFromId);
 router.post('/:keysId/copy', keysController.copyKeys);
+router.post('/copy/all',keysController.copyKeysFromOneToAnother);
 
 module.exports = router;
