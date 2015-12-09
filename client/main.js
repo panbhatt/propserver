@@ -6,6 +6,10 @@ var app = angular.module('propServerUI', [
   'ui.bootstrap' ,
   'xeditable',
   'angularModalService',
+  'ngSanitize',
+  'pascalprecht.translate',    
+  'dialogs.main',
+    
     
   'propAddProjectController',
   'propAddReleaseController',

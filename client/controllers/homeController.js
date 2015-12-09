@@ -8,6 +8,8 @@
         '$http',
         '$location',
         'ModalService',
+        'dialogs',
+       
         'projectService',
         'environmentService',
         'releaseService',
@@ -15,10 +17,10 @@
         'keysService',
 
         function($scope, $http, $location, 
-                 ModalService, projectService, environmentService, releaseService,propGroupService     ,keysService) {
+                 ModalService, dialogs, projectService, environmentService, releaseService,propGroupService     ,keysService) {
 
             
-                $scope.selectedProject = "Select Project";
+              /*  $scope.selectedProject = "Select Project";
                 $scope.project = "";
                 $scope.selectedRelease = "Select Release";
                 $scope.selectedPropGroup = "Select Property Group";
@@ -31,6 +33,13 @@
             
                 $scope.keys = [] ; 
                 $scope.keysId = "";
+            
+                $scope.lang = 'en-US';
+		        $scope.language = 'English'; */
+            
+               /* dialogs.error('Error','An unknown error occurred preventing the completion of the requested action.'); */
+                dialogs.wait('Creating User','Please wait while we attempt to create user "Michael Conroy."<br><br>This should only take a moment.',50);
+                /*
 
 
                 projectService.listProjects().then(function(prjList) {
@@ -184,8 +193,20 @@
                         }).then(function(modal) {
 
                           modal.element.modal();
-                          modal.close.then(function(result) {
-                            console.log(result);
+                          modal.close.then(function(modalResult) {
+                                    if(modalResult.cancel === false ) {
+                                        // Call the Prop Group Service to add the data.    
+                                        propGroupService.addPropGroup($scope.selectedProject, 
+                                            modalResult.propGroupName, modalResult.propGroupDesc).
+                                        then(function(data) {
+                                            console.log("PROP Group Added = ",modalResult.propGroupName); 
+                                            $scope.propGroups.push(modalResult.propGroupName);
+                                        }, function(err) {
+                                            console.log("PROP Group Deleted ");
+                                        });
+                                        
+                                    }
+                              
                           });
                         });
 
@@ -243,7 +264,7 @@
                     $scope.keys.push($scope.inserted);
                   };
     
-
+  */
         }
     ]);
 })();

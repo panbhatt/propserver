@@ -133,15 +133,16 @@
                                   <td style="width:20%"><center>Edit</center></td>
                                 </tr>
                                 <tr ng-repeat="key in keys">
-                                  <td>
+                                  <td><center
                                     <!-- editable username (text with validation) -->
-                                    <span editable-text="key.name" e-name="keyName" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required edit-disabled="false">
-                                      {{ key.name || '' }}
+                                    <span editable-text="key.name" e-name="keyName" e-form="rowform"  e-required class="text-primary" >
+                                      <b>{{ key.name || '' }}</b>
                                     </span>
+                                     </center>  
                                   </td>
                                   <td><center>
                                     <!-- editable status (select-local) -->
-                                     <span editable-text="user.name" e-name="keyValue" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required edit-disabled="false">
+                                     <span editable-text="key.value" e-name="keyValue" e-form="rowform" e-required class="text-Warning">
                                       {{ key.value || '' }}
                                     </span>
                                     </center>
