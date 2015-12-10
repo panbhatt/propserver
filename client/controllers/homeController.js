@@ -74,6 +74,7 @@
                 $scope.changeProject = function(prj) {
                      $scope.selectedProject = prj;
                      $scope.project = prj; 
+                     $scope.keys = [] ; 
                     
                      releaseService.listReleases(prj).then(function(releaseList) {
 
@@ -96,7 +97,10 @@
                                         });
                                     }      
                                      $scope.propGroups = propGroupsForProject ;
-                                } );  
+                                } ); 
+                    
+                    $scope.selectedRelease = "Select Release";
+                    $scope.selectedPropGroup = "Select Property Group";
 
                 };
 
@@ -104,6 +108,7 @@
                 $scope.changeRelease = function(release) {
                    $scope.selectedRelease = release;
                     console.log("Current Release = " , $scope.selectedRelease);
+                    $scope.changeEnv($scope.selectedEnvironment);
                 };
 
                 $scope.changeEnv = function(env) {
@@ -144,6 +149,7 @@
                 $scope.changePropGroup = function(propGroup) {
                 console.log("Selected PropGroup = ", propGroup);
                    $scope.selectedPropGroup = propGroup;
+                   $scope.changeEnv($scope.selectedEnvironment);
                 };
 
 

@@ -74,7 +74,23 @@ a {
  border-style:dotted ;
  overflow:hidden;
 }
+.navbar-darkgreen { /* #003399 - #0033cc */
+     font-size: 14px;
+    background-color: rgba(0, 102, 51, 1);
+    background: -webkit-linear-gradient(top, rgba(0, 153, 51, 1) 0%, rgba(0, 102, 51, 1) 100%);
+    background: linear-gradient(to bottom, rgba(0, 153, 51, 1) 0%, rgba(0, 102, 51, 1) 100%);
+    border: 0px;
+	border-radius: 0;
+}
 
+.header-gradient {
+ background: -webkit-linear-gradient(#FFF, #19cd37); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#FFF, #19cd37); /* For Opera 11.1 to 12.0 */
+background: -moz-linear-gradient(#FFF, #19cd37); /* For Firefox 3.6 to 15 */
+background: linear-gradient(#FFF, #19cd37); /* Standard syntax */
+text-align: center;
+padding: 10px 0px 10px 0px;
+	}
 
 
 
