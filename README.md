@@ -40,7 +40,7 @@ Property Manager is used to manage the properties for different projects. It is 
 
 ### PROP Server Clients
 * NodeJS ->  https://github.com/panbhatt/propserver-node-client
-* Java -> Coming Soon...
+* Java -> https://github.com/panbhatt/propserver-java-client
 
 ### API 
 All the API's of the project is available at the swagger console, http://localhost:3000/swagger. We need to enter the path of the API DOCS JSON before getting a list of all the API's being presented by the Server, which can be tested at same time to get a feel of how the client needs to be coded. 
