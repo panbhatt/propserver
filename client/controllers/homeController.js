@@ -26,7 +26,7 @@
                 $scope.selectedPropGroup = "Select Property Group";
                 $scope.selectedEnvironment = "";
 
-                $scope.projects = [ "ABCD", "DEF", "JKDKD" ] ; 
+                $scope.projects = [ ] ; 
                 $scope.releases = [ ] ; 
                 $scope.propGroups = [ ] ; 
                 $scope.environments = [ ] ; 
@@ -318,8 +318,10 @@
                   keysService.deleteKeyById($scope.keysId, keyNameToDelete).then(function(data){
                         console.log("Key " +  keyNameToDelete + " is been successfully deleted. "); 
                        $scope.keys.splice(index, 1);
+                      dialogs.notify("Property Manager", "<b>"+keyNameToDelete + "</b> Key has been successfully deleted.", dialogWindowOptions ); 
                   }, function(errr) {
                     console.error("An Error occured, while Remvoing a key from the Server " ) ;  
+                       dialogs.error("Property Manager", "An Error occured while deleting the Key:<br/> " + ( err.error || "" ), dialogWindowOptions  ); 
                   });
                   
               };
