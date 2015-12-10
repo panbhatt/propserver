@@ -312,7 +312,7 @@
 
               };
 
-              // remove user
+              // remove key
               $scope.removeKey = function(keyNameToDelete,index) {
                   console.log("Data that is to be deleted " , keyNameToDelete) ; 
                   keysService.deleteKeyById($scope.keysId, keyNameToDelete).then(function(data){
