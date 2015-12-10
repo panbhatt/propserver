@@ -12,7 +12,7 @@ This NODEJS based application provides a centralized way of managing your proper
     1. git clone https://github.com/panbhatt/propserver
     2. npm install
     3. bower install 
-    4. npm start --dbUrl=localhost:192.168.191.110:27017/propserver
+    4. npm start -- --dbUrl=localhost:192.168.191.110:27017/propserver
         if the command line parameter is not provided, the application will try to connecc to the local mongodb present on the same system where the application is installed. 
     5. npm start
     This will start the application on http://localhost:3000
