@@ -7,13 +7,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var swagger = require('swagger-express') ;
+var yargs = require('yargs').argv ; 
 
-
+console.log("Command line arguments are " , yargs.dbUrl);
 
 var app = express();
 
 // MONGOOSE Setup. 
-mongoose.connect("mongodb://localhost/propserver");
+var dbUrl = yargs.dbUrl ; 
+if(dbUrl) {
+    mongoose.connect("mongodb://"+dbUrl);
+    console.log("Connectd via argument beign passed at command line"); 
+} else {
+    mongoose.connect("mongodb://localhost/propserver");
+    console.log("Connected to local mongo server [[ DEFAULT ]] ") ;
+}
+
 
 
 // Load all the Models. 
