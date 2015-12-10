@@ -26,9 +26,9 @@ This NODEJS based application provides a centralized way of managing your proper
 ### Introduction
 
 Property Manager is used to manage the properties for different projects. It is very essential to understand these Entities before moving forward with the installation and usage of the project. 
-## Project
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbspProject
    This entity refers to a project in the system which is being managed by the server. All properties groups/ releases will be tied to a project.  
-## Environment
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbspEnvironment
    This refers to all the environments which are being managed by the property server. E.g. DEV, QA, PROD. Environments are global in the system whcih means once a environment is being added it will be available to all the projects irrespective of the place where it is added. 
 ## Release
    This refers to a RELEASE of a project. Every project will have its own release and all the properites will fall under a property group for a specific release i.e. if a key is present in one release it can be missing in another. Everytime we are trying to modify the keys it will be only application for a specific release of a project.  
