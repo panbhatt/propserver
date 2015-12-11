@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var swagger = require('swagger-express') ;
 var yargs = require('yargs').argv ; 
 
-console.log("Command line arguments are " , yargs.dbUrl);
+console.log("Command line arguments are " , yargs.dbUrl); 
 
 var app = express();
 
@@ -33,9 +33,6 @@ var modelFiles = fs.readdirSync(modelsDir) ;
             require(modelsDir+ "/"+ file);
         }
     });
-
-
-
 
 
 

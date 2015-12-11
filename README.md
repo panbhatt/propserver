@@ -8,6 +8,9 @@ This NODEJS based application provides a centralized way of managing your proper
 * Comes with a clean set of REST API's 
 * All the API's are being documented with the help of  SWAGGER for easy available at http://localhost:3000/swagger (assuming installed on local server). In the Swagger UI just type the API DOCS JSON Path http://localhost:3000/swagger/api-docs.json and all the API will be listed which can be tested very easily via UI. 
 
+### DEMO 
+ https://vast-cliffs-8955.herokuapp.com 
+
 ### Installation
     1. git clone https://github.com/panbhatt/propserver
     2. npm install
@@ -22,7 +25,7 @@ This NODEJS based application provides a centralized way of managing your proper
 * NodeJS must be installed with NVM as the package manager for NODE.
 * Bower must be installed globally as the UI project is based on the Angular n Bootstrap where bower is used to manage all the dependencies.
 
-propserver-panbhatt.rhcloud.com
+
 
 ### Introduction
 
