@@ -68,7 +68,7 @@ app.use(swagger.init(app, {
     swaggerURL: '/swagger',
     swaggerJSON: '/api-docs.json',
     swaggerUI: './node_modules/swagger-ui/dist',
-    basePath: 'http://localhost:3000',
+    basePath: 'https://vast-cliffs-8955.herokuapp.com',
     info: {
       title: 'swagger-express sample app',
       description: 'Swagger + Express = {swagger-express}'
