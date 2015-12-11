@@ -19,8 +19,7 @@ if(dbUrl) {
     mongoose.connect("mongodb://"+dbUrl);
     console.log("Connectd via argument beign passed at command line"); 
 } else {
-    //mongoose.connect("mongodb://localhost/propserver");
-    mongoose.connect("mongodb://propserver:propserver@ds027345.mongolab.com:27345/propserver");
+    mongoose.connect("mongodb://localhost/propserver");
     console.log("Connected to local mongo server [[ DEFAULT ]] ") ;
 }
 
@@ -69,7 +68,7 @@ app.use(swagger.init(app, {
     swaggerURL: '/swagger',
     swaggerJSON: '/api-docs.json',
     swaggerUI: './node_modules/swagger-ui/dist',
-    basePath: 'https://vast-cliffs-8955.herokuapp.com',
+    basePath: 'http://localhost:3000',
     info: {
       title: 'swagger-express sample app',
       description: 'Swagger + Express = {swagger-express}'
