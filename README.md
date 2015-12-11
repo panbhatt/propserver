@@ -22,6 +22,7 @@ This NODEJS based application provides a centralized way of managing your proper
 * NodeJS must be installed with NVM as the package manager for NODE.
 * Bower must be installed globally as the UI project is based on the Angular n Bootstrap where bower is used to manage all the dependencies.
 
+propserver-panbhatt.rhcloud.com
 
 ### Introduction
 
