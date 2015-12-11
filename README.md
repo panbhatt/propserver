@@ -27,6 +27,9 @@ This NODEJS based application provides a centralized way of managing your proper
 
 ### WIKI - Usage Documentation
   https://github.com/panbhatt/propserver/files/59735/Property_Manager_Documentation.pdf 
+  
+### POSTMAN CLIENT 
+   All the API's of the project are availble as PostMan collection in the file PropManager.json
 
 ### Introduction
 
