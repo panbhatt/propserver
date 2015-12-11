@@ -35,5 +35,10 @@
     "bootstrap-vertical-tabs": "~1.2.1",
     "font-awesome": "~4.5.0",
     "jquery": "~2.1.4"
-  }
+  },
+   "resolutions": {
+      "angular": "1.4.8",
+      "bootstrap": "~3.3.6",
+      "bootstrap-select" : "~1.7.7"
+   }
 }
